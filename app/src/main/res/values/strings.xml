@@ -50,4 +50,10 @@
     <string name="skin_type_result">Your skin type: %1$s</string>
     <string name="quiz_incomplete">Please answer all 5 questions.</string>
     <string name="quiz_disclaimer">This is only an orientation, not a medical diagnosis.</string>
+
+    <!-- Account errors -->
+    <string name="error_username_taken">This username is already taken.</string>
+    <string name="error_email_taken">An account with this email already exists.</string>
+    <string name="error_wrong_credentials">Wrong email or password.</string>
+    <string name="error_generic">Something went wrong. Please try again.</string>
 </resources>
