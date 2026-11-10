@@ -74,4 +74,13 @@
     <string name="error_short_password">At least 6 characters.</string>
     <string name="error_passwords_differ">The passwords are not the same.</string>
 
+    <!-- Profile -->
+    <string name="quiz_title">Skin quiz</string>
+    <string name="card_my_skin">My skin</string>
+    <string name="btn_take_quiz">Take the skin quiz</string>
+    <string name="btn_retake_quiz">Retake the quiz</string>
+    <string name="card_coming_soon">Coming soon</string>
+    <string name="card_coming_soon_desc">Face photo · Allergies &amp; avoid list · My routine</string>
+    <string name="btn_logout">Log out</string>
+    <string name="quiz_saved">Saved to your profile</string>
 </resources>

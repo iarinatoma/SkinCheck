@@ -1,16 +1,18 @@
 package com.example.skincheck
 
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.activity.OnBackPressedCallback
-import android.content.Intent
+import androidx.fragment.app.FragmentManager
 import com.example.skincheck.auth.AuthActivity
 import com.example.skincheck.data.Session
+import com.example.skincheck.profile.ProfileFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -47,14 +49,18 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Back button: from any tab go to Home; from Home close the app
+        // Back: 1) close an opened screen (e.g. quiz)  2) go to Home  3) close the app
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (nav.selectedItemId != R.id.nav_home) {
-                    nav.selectedItemId = R.id.nav_home
-                } else {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed()
+                when {
+                    supportFragmentManager.backStackEntryCount > 0 ->
+                        supportFragmentManager.popBackStack()
+                    nav.selectedItemId != R.id.nav_home ->
+                        nav.selectedItemId = R.id.nav_home
+                    else -> {
+                        isEnabled = false
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                 }
             }
         })
@@ -63,10 +69,19 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) show(HomeFragment())
     }
 
-    // Puts a screen into the empty space (fragment_container)
+    // Shows a main tab screen (and forgets any screens opened on top)
     private fun show(fragment: Fragment) {
+        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    // Opens a screen ON TOP of the current one; back returns to the previous screen
+    fun open(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
             .commit()
     }
 }
