@@ -56,4 +56,22 @@
     <string name="error_email_taken">An account with this email already exists.</string>
     <string name="error_wrong_credentials">Wrong email or password.</string>
     <string name="error_generic">Something went wrong. Please try again.</string>
+
+    <!-- Login / Register -->
+    <string name="login_title">Log in</string>
+    <string name="register_title">Create account</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_password_repeat">Repeat password</string>
+    <string name="btn_login">Log in</string>
+    <string name="btn_register">Create account</string>
+    <string name="go_register">No account yet? Create one</string>
+    <string name="go_login">Already have an account? Log in</string>
+    <string name="error_invalid_email">Please enter a valid email.</string>
+    <string name="error_empty_password">Please enter your password.</string>
+    <string name="error_short_username">At least 3 characters.</string>
+    <string name="error_short_password">At least 6 characters.</string>
+    <string name="error_passwords_differ">The passwords are not the same.</string>
+
 </resources>
