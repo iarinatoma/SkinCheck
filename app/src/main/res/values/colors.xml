@@ -2,4 +2,19 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- SkinCheck palette -->
+    <color name="rose">#FFC2858C</color>        <!-- main color: buttons, selected items -->
+    <color name="rose_dark">#FF9E5F67</color>   <!-- pressed buttons, accents -->
+    <color name="rose_light">#FFF6DEDF</color>  <!-- soft backgrounds, chips -->
+    <color name="plum">#FF5B2B33</color>        <!-- text on light rose -->
+    <color name="cream">#FFFFF8F6</color>       <!-- screen background -->
+    <color name="ink">#FF2B1F21</color>         <!-- main text -->
+    <color name="ink_soft">#FF7A6A6C</color>    <!-- secondary text -->
+    <color name="line">#FFEAD9DA</color>        <!-- borders, dividers -->
+
+    <!-- Rating colors -->
+    <color name="rating_green">#FF4E9A6B</color>
+    <color name="rating_yellow">#FFD9A62E</color>
+    <color name="rating_red">#FFC9514F</color>
 </resources>

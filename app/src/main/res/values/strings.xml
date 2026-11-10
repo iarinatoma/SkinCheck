@@ -1,3 +1,53 @@
 <resources>
     <string name="app_name">SkinCheck</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_history">History</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_community">Community</string>
+    <string name="nav_profile">Profile</string>
+    <string name="home_title">Your skin deserves to know.</string>
+    <string name="home_subtitle">Discover what\'s inside your skincare products.</string>
+    <string name="btn_scan_product">Scan a product</string>
+
+    <!-- Profile / skin quiz -->
+    <string name="profile_skin_type_none">Skin type: not set yet</string>
+    <string name="profile_quiz_hint">Answer 5 short questions to find your skin type.</string>
+
+    <string name="q1">1. How does your skin feel one hour after washing?</string>
+    <string name="q1_dry">Tight or dry</string>
+    <string name="q1_oily">Shiny all over</string>
+    <string name="q1_combo">Shiny only on forehead, nose and chin</string>
+    <string name="q1_normal">Comfortable</string>
+
+    <string name="q2">2. How does your face look in the afternoon?</string>
+    <string name="q2_dry">Not shiny at all</string>
+    <string name="q2_oily">Very shiny everywhere</string>
+    <string name="q2_combo">Shiny only in the T-zone</string>
+    <string name="q2_normal">A little shiny, but fine</string>
+
+    <string name="q3">3. How do your pores look?</string>
+    <string name="q3_dry">Almost invisible</string>
+    <string name="q3_oily">Large and visible everywhere</string>
+    <string name="q3_combo">Large only on nose and forehead</string>
+    <string name="q3_normal">Small to medium</string>
+
+    <string name="q4">4. Do you get flaky or rough patches?</string>
+    <string name="q4_dry">Often</string>
+    <string name="q4_oily">Never</string>
+    <string name="q4_combo">Sometimes, on the cheeks</string>
+    <string name="q4_normal">Rarely</string>
+
+    <string name="q5">5. Does your skin often react to new products (redness, itching, burning)?</string>
+    <string name="q5_yes">Yes</string>
+    <string name="q5_no">No</string>
+
+    <string name="btn_calculate">Show my skin type</string>
+    <string name="skin_dry">Dry</string>
+    <string name="skin_oily">Oily</string>
+    <string name="skin_combination">Combination</string>
+    <string name="skin_normal">Normal</string>
+    <string name="skin_sensitive">sensitive</string>
+    <string name="skin_type_result">Your skin type: %1$s</string>
+    <string name="quiz_incomplete">Please answer all 5 questions.</string>
+    <string name="quiz_disclaimer">This is only an orientation, not a medical diagnosis.</string>
 </resources>
