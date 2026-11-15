@@ -21,14 +21,21 @@ class SkinCheckDatabase(context: Context) :
         createUsersTable(db)
         createProductsTable(db)
         createListTables(db)
+        createCommunityTable(db)
+        SephoraImporter.importInto(db, appContext)
     }
 
     // Runs when DB_VERSION goes up on a phone that already has the database.
     // We only ADD what is new, so existing accounts are kept.
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        if (oldVersion < 2) createProductsTable(db)          // already WITH search_text
+        if (oldVersion < 2) createProductsTable(db)          // already with all new columns
         if (oldVersion < 3) createListTables(db)
-        if (oldVersion in 2..3) addSearchText(db)            // old products table: add the column
+        if (oldVersion in 2..3) addSearchText(db)
+        if (oldVersion in 2..4) addSephoraColumns(db)
+        if (oldVersion < 5) {
+            createCommunityTable(db)
+            SephoraImporter.importInto(db, appContext)
+        }
     }
 
     private fun createUsersTable(db: SQLiteDatabase) {
@@ -63,10 +70,14 @@ class SkinCheckDatabase(context: Context) :
                 for_normal      INTEGER NOT NULL DEFAULT 0,
                 for_oily        INTEGER NOT NULL DEFAULT 0,
                 for_sensitive   INTEGER NOT NULL DEFAULT 0,
-                search_text     TEXT NOT NULL DEFAULT ''
+                search_text     TEXT NOT NULL DEFAULT '',
+                sephora_id      TEXT,
+                loves           INTEGER NOT NULL DEFAULT 0,
+                reviews         INTEGER NOT NULL DEFAULT 0
             )
             """.trimIndent()
         )
+        db.execSQL("CREATE INDEX idx_products_search_text ON products(search_text)")
         // Fill the new table with the products from assets/cosmetics.csv
         ProductImporter.importInto(db, appContext)
     }
@@ -108,9 +119,34 @@ class SkinCheckDatabase(context: Context) :
         }
     }
 
+    // Version 5: popularity from Sephora 2023 + an index that makes search_text lookups fast
+    private fun addSephoraColumns(db: SQLiteDatabase) {
+        db.execSQL("ALTER TABLE products ADD COLUMN sephora_id TEXT")
+        db.execSQL("ALTER TABLE products ADD COLUMN loves INTEGER NOT NULL DEFAULT 0")
+        db.execSQL("ALTER TABLE products ADD COLUMN reviews INTEGER NOT NULL DEFAULT 0")
+        db.execSQL("CREATE INDEX IF NOT EXISTS idx_products_search_text ON products(search_text)")
+    }
+
+    // Version 5: what people with each skin type think of a product (from 870,000+ reviews)
+    private fun createCommunityTable(db: SQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE community_ratings (
+                product_id      INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+                skin_type       TEXT NOT NULL,
+                reviews         INTEGER NOT NULL,
+                avg_rating      REAL,
+                recommended_pct INTEGER,
+                PRIMARY KEY (product_id, skin_type)
+            )
+            """.trimIndent()
+        )
+    }
+
     companion object {
         const val DB_NAME = "skincheck.db"
-        // 1: users, 2: + products, 3: + history, favorites, 4: + products.search_text
-        const val DB_VERSION = 4
+        // 1: users, 2: + products, 3: + history, favorites, 4: + search_text,
+        // 5: + Sephora 2023 products, popularity and community ratings
+        const val DB_VERSION = 5
     }
 }
