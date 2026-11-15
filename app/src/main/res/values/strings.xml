@@ -96,4 +96,20 @@
     </plurals>
     <string name="match_yes_short">✓ Suits you</string>
     <string name="match_no_short">✕ Not for you</string>
+
+    <!-- Product screen -->
+    <string name="product_title">Product</string>
+    <string name="match_yes">Suits your skin</string>
+    <string name="match_no">Not made for your skin</string>
+    <string name="match_desc">Made for: %1$s.\nYour skin: %2$s.</string>
+    <string name="match_no_info">No skin type info</string>
+    <string name="match_no_info_desc">Our data source does not say which skin types this product is for.</string>
+    <string name="match_no_quiz">Take the skin quiz</string>
+    <string name="match_no_quiz_desc">Then SkinCheck can tell you if this product suits your skin.</string>
+    <string name="match_icon_yes">✓</string>
+    <string name="match_icon_no">✕</string>
+    <string name="match_icon_unknown">?</string>
+    <string name="product_ingredients">Ingredients (%1$d)</string>
+    <string name="product_ingredients_hint">Ingredient ratings (green / yellow / red) are coming soon.</string>
+    <string name="product_disclaimer">SkinCheck gives general information, not medical advice. Product data: Sephora, via the Kaggle \"Cosmetics datasets\".</string>
 </resources>

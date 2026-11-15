@@ -31,4 +31,9 @@ data class Product(
     // "★ 4.3", or null if nobody rated it (0 in the dataset)
     fun ratingText(): String? =
         rating?.takeIf { it > 0 }?.let { String.format(Locale.US, "★ %.1f", it) }
+
+
+    // "Water, Glycerin, Niacinamide" -> ["Water", "Glycerin", "Niacinamide"]
+    fun ingredientList(): List<String> =
+        ingredients.split(",").map { it.trim().removeSuffix(".") }.filter { it.isNotEmpty() }
 }

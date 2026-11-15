@@ -3,12 +3,12 @@ package com.example.skincheck.products
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.example.skincheck.MainActivity
 import com.example.skincheck.R
 import com.google.android.material.textfield.TextInputEditText
 
@@ -24,9 +24,9 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         val empty = view.findViewById<TextView>(R.id.txt_empty)
         val list = view.findViewById<RecyclerView>(R.id.list_products)
 
+        // Tapping a product opens its page on top of the search screen
         val adapter = ProductAdapter(viewModel.skinCode()) { product ->
-            // For now: just show the name. In part 2 this opens the product screen.
-            Toast.makeText(requireContext(), product.name, Toast.LENGTH_SHORT).show()
+            (requireActivity() as MainActivity).open(ProductFragment.newInstance(product.id))
         }
         list.adapter = adapter
 

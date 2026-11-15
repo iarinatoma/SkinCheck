@@ -17,4 +17,6 @@
     <color name="rating_green">#FF4E9A6B</color>
     <color name="rating_yellow">#FFD9A62E</color>
     <color name="rating_red">#FFC9514F</color>
+    <color name="rating_green_light">#FFE4F2E9</color>
+    <color name="rating_red_light">#FFFBE3E2</color>
 </resources>
