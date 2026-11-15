@@ -50,6 +50,7 @@ object ProductImporter {
                     put("for_normal", row[iNormal].trim().toIntOrNull() ?: 0)
                     put("for_oily", row[iOily].trim().toIntOrNull() ?: 0)
                     put("for_sensitive", row[iSensitive].trim().toIntOrNull() ?: 0)
+                    put("search_text", SearchText.normalize(row[iBrand].trim() + " " + row[iName].trim()))
                 }
                 db.insert("products", null, values)
             }

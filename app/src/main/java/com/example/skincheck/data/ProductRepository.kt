@@ -17,25 +17,22 @@ class ProductRepository(context: Context) {
 
     // ---------- Products ----------
 
-    // Search by name or brand, with sorting and an optional "only for my skin" filter
+    // Search by name or brand (accents and capitals don't matter),
+    // with sorting and an optional "only for my skin" filter
     fun search(
         query: String,
         sort: SortOrder = SortOrder.TOP_RATED,
         skinCode: String? = null,
         limit: Int = 50
-    ): List<Product> {
-        val pattern = "%${query.trim()}%"
-        return queryProducts(
-            "SELECT $columns FROM products ${where(skinCode)} ORDER BY ${sort.sql} LIMIT $limit",
-            pattern, pattern
-        )
-    }
+    ): List<Product> = queryProducts(
+        "SELECT $columns FROM products ${where(skinCode)} ORDER BY ${sort.sql} LIMIT $limit",
+        pattern(query)
+    )
 
     // How many products match in total (the list itself shows at most 50)
     fun countMatching(query: String, skinCode: String? = null): Int {
-        val pattern = "%${query.trim()}%"
         val cursor = db.readableDatabase.rawQuery(
-            "SELECT COUNT(*) FROM products ${where(skinCode)}", arrayOf(pattern, pattern)
+            "SELECT COUNT(*) FROM products ${where(skinCode)}", arrayOf(pattern(query))
         )
         return cursor.use { c -> if (c.moveToFirst()) c.getInt(0) else 0 }
     }
@@ -113,10 +110,13 @@ class ProductRepository(context: Context) {
 
     // ---------- Helpers ----------
 
+    // What the user typed, cleaned the same way as search_text: "Lancôme" -> "%lancome%"
+    private fun pattern(query: String) = "%${SearchText.normalize(query)}%"
+
     // The WHERE part shared by search() and countMatching().
     // Column names come from OUR fixed list, never from what the user typed -> no SQL injection.
     private fun where(skinCode: String?): String {
-        var sql = "WHERE (name LIKE ? OR brand LIKE ?)"
+        var sql = "WHERE search_text LIKE ?"
         if (!skinCode.isNullOrBlank()) {
             val parts = skinCode.split(",")
             val column = when (parts[0]) {
