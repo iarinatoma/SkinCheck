@@ -10,16 +10,23 @@ class SkinCheckDatabase(context: Context) :
 
     private val appContext = context.applicationContext
 
+    // SQLite ignores foreign keys unless we turn them on
+    override fun onConfigure(db: SQLiteDatabase) {
+        db.setForeignKeyConstraintsEnabled(true)
+    }
+
     // Runs only once, when the database does not exist yet (fresh install)
     override fun onCreate(db: SQLiteDatabase) {
         createUsersTable(db)
         createProductsTable(db)
+        createListTables(db)
     }
 
     // Runs when DB_VERSION goes up on a phone that already has the database.
     // We only ADD what is new, so existing accounts are kept.
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         if (oldVersion < 2) createProductsTable(db)
+        if (oldVersion < 3) createListTables(db)
     }
 
     private fun createUsersTable(db: SQLiteDatabase) {
@@ -61,8 +68,32 @@ class SkinCheckDatabase(context: Context) :
         ProductImporter.importInto(db, appContext)
     }
 
+    // Version 3: which products each user opened, and which ones they saved
+    private fun createListTables(db: SQLiteDatabase) {
+        db.execSQL(
+            """
+            CREATE TABLE history (
+                user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+                viewed_at  INTEGER NOT NULL,
+                PRIMARY KEY (user_id, product_id)
+            )
+            """.trimIndent()
+        )
+        db.execSQL(
+            """
+            CREATE TABLE favorites (
+                user_id    INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+                added_at   INTEGER NOT NULL,
+                PRIMARY KEY (user_id, product_id)
+            )
+            """.trimIndent()
+        )
+    }
+
     companion object {
         const val DB_NAME = "skincheck.db"
-        const val DB_VERSION = 2 // was 1; going up makes onUpgrade run
+        const val DB_VERSION = 3 // 1: users, 2: + products, 3: + history, favorites
     }
 }

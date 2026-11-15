@@ -54,6 +54,16 @@
                 android:layout_marginTop="6dp"
                 android:textColor="@color/ink_soft" />
 
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_favorite"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/btn_save"
+                app:cornerRadius="24dp" />
+
             <!-- Big card: does it suit my skin? -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_match"

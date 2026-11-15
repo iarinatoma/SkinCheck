@@ -112,4 +112,14 @@
     <string name="product_ingredients">Ingredients (%1$d)</string>
     <string name="product_ingredients_hint">Ingredient ratings (green / yellow / red) are coming soon.</string>
     <string name="product_disclaimer">SkinCheck gives general information, not medical advice. Product data: Sephora, via the Kaggle \"Cosmetics datasets\".</string>
+
+    <!-- History / My list -->
+    <string name="history_title">My products</string>
+    <string name="tab_recent">Recently viewed</string>
+    <string name="tab_my_list">My list</string>
+    <string name="history_empty">Products you open will appear here.</string>
+    <string name="my_list_empty">Tap ♡ on a product page to save it here.</string>
+    <string name="btn_clear_history">Clear history</string>
+    <string name="btn_save">♡ Save to my list</string>
+    <string name="btn_saved">♥ Saved in my list</string>
 </resources>

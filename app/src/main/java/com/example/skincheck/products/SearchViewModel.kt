@@ -26,7 +26,7 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     // The logged-in user's skin type, or null if the quiz was not taken
     fun skinCode(): String? {
-        val id = Session.userId(getApplication<Application>()) ?: return null
-        return users.getUser(id)?.skinType
+        val id = Session.userId(getApplication<Application>())
+        return id?.let { users.getUser(it)?.skinType }
     }
 }

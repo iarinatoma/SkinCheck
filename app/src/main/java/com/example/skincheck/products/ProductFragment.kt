@@ -13,6 +13,7 @@ import com.example.skincheck.data.Product
 import com.example.skincheck.data.SkinType
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.button.MaterialButton
 
 class ProductFragment : Fragment(R.layout.fragment_product) {
 
@@ -43,6 +44,13 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
             ingredientsTitle.text = getString(R.string.product_ingredients, list.size)
             ingredients.text = list.joinToString("  ·  ")
         }
+
+        // ♡ button: save to / remove from My list
+        val favoriteButton = view.findViewById<MaterialButton>(R.id.btn_favorite)
+        viewModel.isFavorite.observe(viewLifecycleOwner) { saved ->
+            favoriteButton.setText(if (saved) R.string.btn_saved else R.string.btn_save)
+        }
+        favoriteButton.setOnClickListener { viewModel.toggleFavorite() }
 
         if (viewModel.product.value == null) viewModel.load(productId)
     }

@@ -14,6 +14,7 @@ import com.example.skincheck.data.Session
 import com.example.skincheck.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.skincheck.products.ScanFragment
+import com.example.skincheck.history.HistoryFragment
 
 class MainActivity : AppCompatActivity() {
 
