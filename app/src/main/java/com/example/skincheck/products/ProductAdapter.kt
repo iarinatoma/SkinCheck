@@ -41,7 +41,8 @@ class ProductAdapter(
 
         holder.brand.text = product.brand
         holder.name.text = product.name
-        holder.meta.text = listOfNotNull(product.category, product.priceText()).joinToString(" · ")
+        holder.meta.text = listOfNotNull(product.category, product.priceText(), product.lovesText())
+            .joinToString(" · ")
 
         val rating = product.ratingText()
         holder.rating.isVisible = rating != null

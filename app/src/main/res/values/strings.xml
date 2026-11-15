@@ -142,4 +142,15 @@
     <string name="verdict_counts">%1$d good · %2$d caution · %3$d avoid\nJudged for: %4$s</string>
     <string name="verdict_no_quiz">normal skin (take the quiz for a personal result)</string>
     <string name="verdict_found">In this product: %1$s</string>
+
+    <!-- Community recommends -->
+    <string name="sort_popular">Most popular</string>
+    <string name="community_label">Community recommends</string>
+    <string name="community_mine">%1$s★ from people with %2$s skin</string>
+    <string name="community_mine_detail">%1$d%% recommend it · %2$d reviews</string>
+    <string name="community_reviews_only">%1$d reviews</string>
+    <string name="community_none_for_me">No reviews yet from people with your skin type.</string>
+    <string name="community_no_quiz">Take the skin quiz to see what people with your skin think.</string>
+    <string name="community_others">Other skin types: %1$s</string>
+    <string name="community_source">From Sephora reviews (Kaggle, CC BY 4.0)</string>
 </resources>

@@ -5,7 +5,8 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
-// The only place in the app that talks to the "products", "history" and "favorites" tables
+// The only place in the app that talks to the "products", "history", "favorites"
+// and "community_ratings" tables
 class ProductRepository(context: Context) {
 
     private val db = SkinCheckDatabase(context.applicationContext)
@@ -13,7 +14,8 @@ class ProductRepository(context: Context) {
     // "products.id" (not just "id") because some queries JOIN other tables too
     private val columns =
         "products.id, category, brand, name, price, rating, ingredients, " +
-                "for_combination, for_dry, for_normal, for_oily, for_sensitive"
+                "for_combination, for_dry, for_normal, for_oily, for_sensitive, " +
+                "products.loves, products.reviews"
 
     // ---------- Products ----------
 
@@ -108,6 +110,28 @@ class ProductRepository(context: Context) {
         userId.toString()
     )
 
+    // ---------- Community (table "community_ratings") ----------
+
+    fun community(productId: Long): List<CommunityRating> {
+        val cursor = db.readableDatabase.rawQuery(
+            "SELECT skin_type, reviews, avg_rating, recommended_pct FROM community_ratings " +
+                    "WHERE product_id = ? ORDER BY reviews DESC",
+            arrayOf(productId.toString())
+        )
+        return cursor.use { c ->
+            buildList {
+                while (c.moveToNext()) add(
+                    CommunityRating(
+                        skinType = c.getString(0),
+                        reviews = c.getInt(1),
+                        avgRating = if (c.isNull(2)) null else c.getDouble(2),
+                        recommendedPct = if (c.isNull(3)) null else c.getInt(3)
+                    )
+                )
+            }
+        }
+    }
+
     // ---------- Helpers ----------
 
     // What the user typed, cleaned the same way as search_text: "Lancôme" -> "%lancome%"
@@ -153,7 +177,9 @@ class ProductRepository(context: Context) {
             price = if (isNull(4)) null else getDouble(4),
             rating = if (isNull(5)) null else getDouble(5),
             ingredients = getString(6),
-            suitableFor = suitable
+            suitableFor = suitable,
+            loves = getInt(12),
+            reviews = getInt(13)
         )
     }
 }

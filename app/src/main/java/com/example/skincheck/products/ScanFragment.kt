@@ -54,13 +54,15 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         // Sorting: exactly one chip is selected. First show the one chosen before.
         sortChips.check(
             when (viewModel.sort) {
+                SortOrder.TOP_RATED -> R.id.chip_top
+                SortOrder.MOST_POPULAR -> R.id.chip_popular
                 SortOrder.PRICE_LOW -> R.id.chip_price_low
                 SortOrder.PRICE_HIGH -> R.id.chip_price_high
-                SortOrder.TOP_RATED -> R.id.chip_top
             }
         )
         sortChips.setOnCheckedStateChangeListener { _, checkedIds ->
             val sort = when (checkedIds.firstOrNull()) {
+                R.id.chip_popular -> SortOrder.MOST_POPULAR
                 R.id.chip_price_low -> SortOrder.PRICE_LOW
                 R.id.chip_price_high -> SortOrder.PRICE_HIGH
                 else -> SortOrder.TOP_RATED

@@ -76,6 +76,13 @@
                     android:text="@string/sort_top_rated" />
 
                 <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_popular"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sort_popular" />
+
+                <com.google.android.material.chip.Chip
                     android:id="@+id/chip_price_low"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"

@@ -10,9 +10,11 @@ import androidx.core.os.bundleOf
 import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.core.text.color
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.skincheck.R
+import com.example.skincheck.data.CommunityRating
 import com.example.skincheck.data.Product
 import com.example.skincheck.data.ProductAnalysis
 import com.example.skincheck.data.Rating
@@ -21,6 +23,7 @@ import com.example.skincheck.data.Verdict
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import java.util.Locale
 
 class ProductFragment : Fragment(R.layout.fragment_product) {
 
@@ -42,8 +45,9 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
             if (product == null) return@observe
             brand.text = product.brand
             name.text = product.name
-            meta.text = listOfNotNull(product.category, product.priceText(), product.ratingText())
-                .joinToString("  ·  ")
+            meta.text = listOfNotNull(
+                product.category, product.priceText(), product.ratingText(), product.lovesText()
+            ).joinToString("  ·  ")
             showMatch(view, product, viewModel.skinCode)
         }
 
@@ -53,6 +57,11 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
             showVerdict(view, analysis, viewModel.skinCode)
             ingredientsTitle.text = getString(R.string.product_ingredients, analysis.ingredients.size)
             ingredients.text = coloredIngredients(analysis)
+        }
+
+        // "Community recommends"
+        viewModel.community.observe(viewLifecycleOwner) { ratings ->
+            showCommunity(view, ratings, viewModel.skinCode)
         }
 
         // ♡ button: save to / remove from My list
@@ -132,6 +141,68 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
             }
         }
     }
+
+    // ---------- Community recommends ----------
+
+    private fun showCommunity(view: View, ratings: List<CommunityRating>, skinCode: String?) {
+        val card = view.findViewById<MaterialCardView>(R.id.card_community)
+        val main = view.findViewById<TextView>(R.id.txt_community_main)
+        val detail = view.findViewById<TextView>(R.id.txt_community_detail)
+        val others = view.findViewById<TextView>(R.id.txt_community_others)
+
+        // No reviews for this product -> no card (we don't invent anything)
+        card.isVisible = ratings.isNotEmpty()
+        if (ratings.isEmpty()) return
+
+        val mySkin = skinCode?.split(",")?.first()     // "combination,sensitive" -> "combination"
+        val mine = ratings.find { it.skinType == mySkin }
+        val myRating = mine?.avgRating
+
+        if (mine != null && myRating != null) {
+            main.text = getString(
+                R.string.community_mine, oneDecimal(myRating), skinName(mine.skinType).lowercase()
+            )
+            val level = when {
+                myRating >= 4.0 -> Rating.GOOD
+                myRating >= 3.5 -> Rating.CAUTION
+                else -> Rating.AVOID
+            }
+            main.setTextColor(textColor(level) ?: color(R.color.ink))
+            detail.isVisible = true
+            detail.text = if (mine.recommendedPct != null) {
+                getString(R.string.community_mine_detail, mine.recommendedPct, mine.reviews)
+            } else {
+                getString(R.string.community_reviews_only, mine.reviews)
+            }
+        } else {
+            main.setText(if (mySkin == null) R.string.community_no_quiz else R.string.community_none_for_me)
+            main.setTextColor(color(R.color.ink))
+            detail.isVisible = false
+        }
+
+        // The other skin types, e.g. "Oily 2.8★ (22) · Dry 4.5★ (40)"
+        val rest = ratings.filter { it !== mine && it.avgRating != null }
+        others.isVisible = rest.isNotEmpty()
+        others.text = getString(
+            R.string.community_others,
+            rest.joinToString(" · ") {
+                "${skinName(it.skinType)} ${oneDecimal(it.avgRating ?: 0.0)}★ (${it.reviews})"
+            }
+        )
+    }
+
+    private fun oneDecimal(value: Double) = String.format(Locale.US, "%.1f", value)
+
+    private fun skinName(code: String) = getString(
+        when (code) {
+            "dry" -> R.string.skin_dry
+            "oily" -> R.string.skin_oily
+            "combination" -> R.string.skin_combination
+            else -> R.string.skin_normal
+        }
+    )
+
+    // ---------- Colors ----------
 
     private fun color(res: Int) = ContextCompat.getColor(requireContext(), res)
 
