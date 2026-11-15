@@ -17,15 +17,27 @@ class ProductRepository(context: Context) {
 
     // ---------- Products ----------
 
-    // Search by product name or brand, best rated first (same rating -> by name)
-    fun search(query: String, limit: Int = 50): List<Product> {
+    // Search by name or brand, with sorting and an optional "only for my skin" filter
+    fun search(
+        query: String,
+        sort: SortOrder = SortOrder.TOP_RATED,
+        skinCode: String? = null,
+        limit: Int = 50
+    ): List<Product> {
         val pattern = "%${query.trim()}%"
         return queryProducts(
-            "SELECT $columns FROM products " +
-                    "WHERE name LIKE ? OR brand LIKE ? " +
-                    "ORDER BY rating DESC, name LIMIT $limit",
+            "SELECT $columns FROM products ${where(skinCode)} ORDER BY ${sort.sql} LIMIT $limit",
             pattern, pattern
         )
+    }
+
+    // How many products match in total (the list itself shows at most 50)
+    fun countMatching(query: String, skinCode: String? = null): Int {
+        val pattern = "%${query.trim()}%"
+        val cursor = db.readableDatabase.rawQuery(
+            "SELECT COUNT(*) FROM products ${where(skinCode)}", arrayOf(pattern, pattern)
+        )
+        return cursor.use { c -> if (c.moveToFirst()) c.getInt(0) else 0 }
     }
 
     fun getById(id: Long): Product? =
@@ -100,6 +112,24 @@ class ProductRepository(context: Context) {
     )
 
     // ---------- Helpers ----------
+
+    // The WHERE part shared by search() and countMatching().
+    // Column names come from OUR fixed list, never from what the user typed -> no SQL injection.
+    private fun where(skinCode: String?): String {
+        var sql = "WHERE (name LIKE ? OR brand LIKE ?)"
+        if (!skinCode.isNullOrBlank()) {
+            val parts = skinCode.split(",")
+            val column = when (parts[0]) {
+                "dry" -> "for_dry"
+                "oily" -> "for_oily"
+                "combination" -> "for_combination"
+                else -> "for_normal"
+            }
+            sql += " AND $column = 1"
+            if ("sensitive" in parts) sql += " AND for_sensitive = 1"
+        }
+        return sql
+    }
 
     // Runs a SELECT and turns every row into a Product
     private fun queryProducts(sql: String, vararg args: String): List<Product> {

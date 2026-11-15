@@ -88,7 +88,8 @@
     <string name="search_title">Find a product</string>
     <string name="search_subtitle">Camera scanning comes later. For now, search by name or brand.</string>
     <string name="search_hint">Search products</string>
-    <string name="search_placeholder">e.g. Clinique, cream, serum</string>    <string name="search_top_rated">Top rated · %1$d products in the database</string>
+    <string name="search_placeholder">e.g. Clinique, cream, serum</string>
+    <string name="search_top_rated">%1$d products in the database</string>
     <string name="search_empty">No products found. Try another name or brand.</string>
     <plurals name="search_results">
         <item quantity="one">%d result</item>
@@ -122,4 +123,11 @@
     <string name="btn_clear_history">Clear history</string>
     <string name="btn_save">♡ Save to my list</string>
     <string name="btn_saved">♥ Saved in my list</string>
+
+    <!-- Sorting and filter -->
+    <string name="search_showing">Showing %1$d of %2$d</string>
+    <string name="sort_top_rated">Top rated</string>
+    <string name="sort_price_low">Price: low to high</string>
+    <string name="sort_price_high">Price: high to low</string>
+    <string name="filter_only_me">Only for my skin</string>
 </resources>
