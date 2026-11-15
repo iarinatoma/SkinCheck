@@ -17,5 +17,4 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 }
 
 class HistoryFragment : Fragment(R.layout.fragment_history)
-class ScanFragment : Fragment(R.layout.fragment_scan)
 class CommunityFragment : Fragment(R.layout.fragment_community)

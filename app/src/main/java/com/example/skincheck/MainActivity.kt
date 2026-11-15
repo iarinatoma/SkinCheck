@@ -13,6 +13,7 @@ import com.example.skincheck.auth.AuthActivity
 import com.example.skincheck.data.Session
 import com.example.skincheck.profile.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.skincheck.products.ScanFragment
 
 class MainActivity : AppCompatActivity() {
 
