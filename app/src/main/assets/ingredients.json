@@ -1,0 +1,378 @@
+{
+  "version": 1,
+  "about": "SkinCheck knowledge base: how common ingredients affect each skin type. good = green, caution = yellow, avoid = red, missing = neutral (grey). General information, not medical advice.",
+  "sources": {
+    "EU_1223": "Regulation (EC) No 1223/2009 on cosmetic products (Annex II banned substances, Annex III allergen labelling, Annex V preservatives) - https://eur-lex.europa.eu/eli/reg/2009/1223/oj",
+    "EU_2016_1198": "Commission Regulation (EU) 2016/1198 - methylisothiazolinone banned in leave-on products - https://www.legislation.gov.uk/eur/2016/1198/data.html",
+    "EU_2021_1902": "Commission Regulation (EU) 2021/1902 - butylphenyl methylpropional (Lilial) banned from 1 March 2022 - https://de.wessling-group.com/en/from-march-1-2022-a-ban-on-the-fragrance-lilial-will-be-in-force",
+    "EU_2023_1545": "Commission Regulation (EU) 2023/1545 - extended list of fragrance allergens that must be labelled - https://eur-lex.europa.eu/eli/reg/2023/1545/oj",
+    "SCCS_PARABENS": "Scientific Committee on Consumer Safety, opinion on parabens (SCCS/1348/10) - https://ec.europa.eu/health/sites/default/files/scientific_committees/consumer_safety/docs/sccs_o_041.pdf",
+    "PAULAS_CHOICE": "Paula's Choice Ingredient Dictionary - https://www.paulaschoice.com/ingredient-dictionary",
+    "INCIDECODER": "INCIDecoder ingredient explanations - https://incidecoder.com",
+    "AAD": "American Academy of Dermatology, skin care basics - https://www.aad.org/public/everyday-care/skin-care-basics"
+  },
+  "ingredients": [
+    {
+      "name": "Glycerin",
+      "aliases": ["glycerin", "glycerine"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Humectant: pulls water into the skin and keeps it hydrated.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Hyaluronic acid",
+      "aliases": ["hyaluronic acid", "sodium hyaluronate", "hydrolyzed hyaluronic acid", "sodium hyaluronate crosspolymer", "sodium acetylated hyaluronate", "hydrolyzed sodium hyaluronate"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Holds a lot of water: light hydration for every skin type.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Niacinamide",
+      "aliases": ["niacinamide"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Vitamin B3: strengthens the skin barrier, evens skin tone and helps with oiliness and redness.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Ceramides",
+      "aliases": ["ceramide np", "ceramide ap", "ceramide eop", "ceramide ns", "ceramide ng", "ceramide eos", "ceramide as", "ceramide 1", "ceramide 2", "ceramide 3", "ceramide-3", "ceramide 6 ii"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Lipids that the skin barrier is made of: repair dry and irritated skin.",
+      "source": "AAD"
+    },
+    {
+      "name": "Cholesterol",
+      "aliases": ["cholesterol"],
+      "dry": "good", "normal": "good", "sensitive": "good",
+      "why": "Part of the natural skin barrier, together with ceramides.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Panthenol",
+      "aliases": ["panthenol", "d-panthenol", "dexpanthenol"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Pro-vitamin B5: hydrates and soothes.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Allantoin",
+      "aliases": ["allantoin"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Soothing and softening, very well tolerated.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Bisabolol",
+      "aliases": ["bisabolol"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Calming ingredient from chamomile.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Centella asiatica",
+      "aliases": ["centella asiatica extract", "centella asiatica leaf extract", "centella asiatica leaf water", "centella extract"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Plant extract that calms redness and supports skin repair.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Aloe vera",
+      "aliases": ["aloe barbadensis leaf juice", "aloe barbadensis leaf extract", "aloe barbadensis leaf water"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Hydrating and soothing.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Green tea extract",
+      "aliases": ["camellia sinensis leaf extract", "camellia sinensis extract"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Antioxidant that also calms the skin.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Betaine",
+      "aliases": ["betaine"],
+      "dry": "good", "normal": "good", "sensitive": "good",
+      "why": "Gentle humectant that helps the skin keep water.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Sodium PCA",
+      "aliases": ["sodium pca"],
+      "dry": "good", "normal": "good", "combination": "good",
+      "why": "Part of the skin's own moisturizing factor.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Urea",
+      "aliases": ["urea"],
+      "dry": "good", "normal": "good", "combination": "good",
+      "why": "Hydrates and softens rough, dry skin.",
+      "source": "AAD"
+    },
+    {
+      "name": "Squalane",
+      "aliases": ["squalane"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Light oil similar to the skin's own sebum; does not clog pores.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Vitamin E",
+      "aliases": ["tocopherol", "tocopheryl acetate"],
+      "dry": "good", "combination": "good", "normal": "good",
+      "why": "Antioxidant and moisturizing.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Jojoba oil",
+      "aliases": ["simmondsia chinensis seed oil", "simmondsia chinensis oil", "jojoba oil"],
+      "dry": "good", "combination": "good", "normal": "good",
+      "why": "Plant wax-oil that nourishes without feeling heavy.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Sunflower seed oil",
+      "aliases": ["helianthus annuus seed oil", "helianthus annuus oil"],
+      "dry": "good", "normal": "good",
+      "why": "Rich in linoleic acid, supports the skin barrier.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Shea butter",
+      "aliases": ["butyrospermum parkii butter", "shea butter", "butyrospermum parkii"],
+      "dry": "good", "normal": "good", "oily": "caution", "combination": "caution",
+      "why": "Rich emollient: great for dry skin, can feel heavy on oily skin.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Mineral oil",
+      "aliases": ["mineral oil", "paraffinum liquidum", "huile minerale"],
+      "dry": "good", "sensitive": "good",
+      "why": "Cosmetic-grade mineral oil is very gentle and locks in moisture.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Dimethicone",
+      "aliases": ["dimethicone"],
+      "dry": "good",
+      "why": "Silicone that stops water loss; does not clog pores for most people.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Fatty alcohols",
+      "aliases": ["cetearyl alcohol", "cetyl alcohol", "stearyl alcohol", "behenyl alcohol", "myristyl alcohol", "arachidyl alcohol"],
+      "dry": "good", "normal": "good",
+      "why": "Softening fatty alcohol. This is NOT the drying kind of alcohol.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Coconut oil",
+      "aliases": ["cocos nucifera oil", "coconut oil"],
+      "dry": "good", "oily": "caution", "combination": "caution",
+      "why": "Nourishing, but can clog pores on oily or acne-prone skin.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Isopropyl esters",
+      "aliases": ["isopropyl myristate", "isopropyl palmitate"],
+      "oily": "caution", "combination": "caution",
+      "why": "Emollients that can clog pores on acne-prone skin.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Salicylic acid (BHA)",
+      "aliases": ["salicylic acid", "beta hydroxy acid"],
+      "oily": "good", "combination": "good", "dry": "caution", "sensitive": "caution",
+      "why": "Exfoliates inside the pores: helps with blackheads and oiliness, can dry out or sting.",
+      "source": "AAD"
+    },
+    {
+      "name": "Glycolic acid (AHA)",
+      "aliases": ["glycolic acid"],
+      "oily": "good", "combination": "good", "normal": "good", "sensitive": "caution",
+      "why": "Exfoliates the surface for smoother skin; can sting sensitive skin. Use sunscreen.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Lactic acid (AHA)",
+      "aliases": ["lactic acid", "l lactic acid"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "caution",
+      "why": "Gentle exfoliant that also hydrates; can sting sensitive skin.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Mandelic acid (AHA)",
+      "aliases": ["mandelic acid"],
+      "oily": "good", "combination": "good", "normal": "good", "sensitive": "caution",
+      "why": "Mild exfoliant with larger molecules, so it works more slowly and gently.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Retinol",
+      "aliases": ["retinol", "hydroxypinacolone retinoate", "retinyl retinoate"],
+      "oily": "good", "combination": "good", "normal": "good", "dry": "caution", "sensitive": "caution",
+      "why": "Proven against wrinkles and acne; may cause dryness and irritation at the start.",
+      "source": "AAD"
+    },
+    {
+      "name": "Bakuchiol",
+      "aliases": ["bakuchiol"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good",
+      "why": "Plant-based alternative to retinol, usually gentler.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Vitamin C",
+      "aliases": ["ascorbic acid", "l-ascorbic acid"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "caution",
+      "why": "Antioxidant that brightens the skin; the pure acid form can sting sensitive skin.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Vitamin C derivatives",
+      "aliases": ["tetrahexyldecyl ascorbate", "ascorbyl glucoside", "ascorbyl palmitate", "sodium ascorbyl phosphate", "magnesium ascorbyl phosphate", "3-o-ethyl ascorbic acid"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "More stable and gentler forms of vitamin C.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Zinc oxide",
+      "aliases": ["zinc oxide"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Mineral UV filter, gentle and calming.",
+      "source": "AAD"
+    },
+    {
+      "name": "Titanium dioxide",
+      "aliases": ["titanium dioxide"],
+      "dry": "good", "oily": "good", "combination": "good", "normal": "good", "sensitive": "good",
+      "why": "Mineral UV filter and white pigment, very well tolerated.",
+      "source": "AAD"
+    },
+    {
+      "name": "Clay",
+      "aliases": ["kaolin", "bentonite"],
+      "oily": "good", "combination": "good", "dry": "caution",
+      "why": "Absorbs excess oil; can dry out skin that is already dry.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Witch hazel",
+      "aliases": ["hamamelis virginiana water", "hamamelis virginiana extract", "hamamelis virginiana leaf extract", "hamamelis virginiana", "witch hazel water"],
+      "dry": "caution", "sensitive": "caution",
+      "why": "Astringent with tannins; can be drying or irritating.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Lanolin",
+      "aliases": ["lanolin", "lanolin alcohol", "lanolin oil"],
+      "dry": "good", "sensitive": "caution",
+      "why": "Very rich emollient, but a known contact allergen for some people.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Drying alcohol",
+      "aliases": ["alcohol denat", "alcohol", "sd alcohol 40-b", "sd alcohol", "denatured alcohol", "ethanol", "isopropyl alcohol"],
+      "dry": "avoid", "sensitive": "avoid", "normal": "caution", "combination": "caution", "oily": "caution",
+      "why": "Gives a light, quick-drying feel but dries out the skin and can damage the skin barrier.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Fragrance",
+      "aliases": ["fragrance", "parfum", "natural fragrance"],
+      "sensitive": "avoid", "dry": "caution", "normal": "caution", "combination": "caution", "oily": "caution",
+      "why": "The most common cause of allergic reactions to cosmetics; adds nothing for the skin.",
+      "source": "AAD"
+    },
+    {
+      "name": "Fragrance allergens (EU list)",
+      "aliases": ["linalool", "limonene", "citronellol", "geraniol", "citral", "eugenol", "isoeugenol", "coumarin", "farnesol", "benzyl alcohol", "benzyl salicylate", "benzyl benzoate", "benzyl cinnamate", "hexyl cinnamal", "amyl cinnamal", "amylcinnamyl alcohol", "cinnamal", "cinnamyl alcohol", "alpha-isomethyl ionone", "hydroxycitronellal", "anise alcohol", "methyl 2-octynoate", "evernia prunastri extract", "evernia furfuracea extract"],
+      "sensitive": "caution",
+      "why": "Known allergen: EU law requires it to be named on the label.",
+      "source": "EU_2023_1545"
+    },
+    {
+      "name": "Essential oils",
+      "aliases": ["lavandula angustifolia oil", "eucalyptus globulus leaf oil", "citrus aurantium bergamia fruit oil", "citrus aurantium dulcis peel oil", "citrus limon peel oil", "pelargonium graveolens flower oil", "melaleuca alternifolia leaf oil", "rosmarinus officinalis leaf oil"],
+      "sensitive": "avoid",
+      "why": "Natural fragrance that contains several allergens; often irritates sensitive skin.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Menthol / mint",
+      "aliases": ["menthol", "peppermint oil", "mentha piperita oil", "mentha piperita leaf oil", "menthyl lactate"],
+      "sensitive": "avoid", "dry": "caution", "normal": "caution", "combination": "caution", "oily": "caution",
+      "why": "The cooling feeling is actually a mild irritation.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Sodium lauryl sulfate",
+      "aliases": ["sodium lauryl sulfate", "sls"],
+      "dry": "avoid", "sensitive": "avoid", "normal": "caution", "combination": "caution", "oily": "caution",
+      "why": "Strong cleansing agent that strips the skin and is a classic irritant.",
+      "source": "PAULAS_CHOICE"
+    },
+    {
+      "name": "Sodium laureth sulfate",
+      "aliases": ["sodium laureth sulfate", "sles"],
+      "dry": "caution", "sensitive": "caution",
+      "why": "Gentler than SLS, but can still dry out the skin.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Propylene glycol",
+      "aliases": ["propylene glycol"],
+      "sensitive": "caution",
+      "why": "Usually fine, but it can irritate or cause allergies in a small number of people.",
+      "source": "INCIDECODER"
+    },
+    {
+      "name": "Methylisothiazolinone",
+      "aliases": ["methylisothiazolinone", "methylchloroisothiazolinone"],
+      "sensitive": "avoid", "dry": "caution", "normal": "caution", "combination": "caution", "oily": "caution",
+      "why": "Strong allergen: banned in leave-on products in the EU since 2017.",
+      "source": "EU_2016_1198"
+    },
+    {
+      "name": "Formaldehyde releasers",
+      "aliases": ["dmdm hydantoin", "imidazolidinyl urea", "diazolidinyl urea", "quaternium-15", "bronopol"],
+      "sensitive": "avoid", "dry": "caution", "normal": "caution", "combination": "caution", "oily": "caution",
+      "why": "Preservatives that slowly release formaldehyde, a known allergen.",
+      "source": "EU_1223"
+    },
+    {
+      "name": "Lilial",
+      "aliases": ["butylphenyl methylpropional"],
+      "sensitive": "avoid", "dry": "avoid", "normal": "avoid", "combination": "avoid", "oily": "avoid",
+      "why": "Fragrance banned in the EU since March 2022 (toxic for reproduction).",
+      "source": "EU_2021_1902"
+    },
+    {
+      "name": "Lyral (HICC)",
+      "aliases": ["hydroxyisohexyl 3-cyclohexene carboxaldehyde"],
+      "sensitive": "avoid", "dry": "avoid", "normal": "avoid", "combination": "avoid", "oily": "avoid",
+      "why": "Strong fragrance allergen, banned in the EU since 2021.",
+      "source": "EU_1223"
+    },
+    {
+      "name": "Banned parabens",
+      "aliases": ["isobutylparaben", "isopropylparaben", "phenylparaben", "benzylparaben", "pentylparaben"],
+      "sensitive": "avoid", "dry": "avoid", "normal": "avoid", "combination": "avoid", "oily": "avoid",
+      "why": "Banned in the EU since 2014 because their safety could not be shown.",
+      "source": "EU_1223"
+    },
+    {
+      "name": "Parabens",
+      "aliases": ["methylparaben", "ethylparaben", "propylparaben", "butylparaben"],
+      "why": "Preservatives. The EU safety committee considers them safe at the allowed amounts.",
+      "source": "SCCS_PARABENS"
+    },
+    {
+      "name": "Phenoxyethanol",
+      "aliases": ["phenoxyethanol"],
+      "why": "Common preservative, allowed in the EU up to 1%. Keeps the product free of bacteria.",
+      "source": "EU_1223"
+    }
+  ]
+}

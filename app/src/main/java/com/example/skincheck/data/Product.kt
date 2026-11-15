@@ -32,8 +32,6 @@ data class Product(
     fun ratingText(): String? =
         rating?.takeIf { it > 0 }?.let { String.format(Locale.US, "★ %.1f", it) }
 
-
-    // "Water, Glycerin, Niacinamide" -> ["Water", "Glycerin", "Niacinamide"]
-    fun ingredientList(): List<String> =
-        ingredients.split(",").map { it.trim().removeSuffix(".") }.filter { it.isNotEmpty() }
+    // The cleaned list of ingredient names (see IngredientParser)
+    fun ingredientList(): List<String> = IngredientParser.parse(ingredients)
 }
