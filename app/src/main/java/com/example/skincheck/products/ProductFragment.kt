@@ -3,17 +3,24 @@ package com.example.skincheck.products
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.skincheck.R
 import com.example.skincheck.data.Product
+import com.example.skincheck.data.ProductAnalysis
+import com.example.skincheck.data.Rating
 import com.example.skincheck.data.SkinType
+import com.example.skincheck.data.Verdict
 import com.google.android.material.appbar.MaterialToolbar
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 
 class ProductFragment : Fragment(R.layout.fragment_product) {
 
@@ -30,19 +37,22 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         val ingredientsTitle = view.findViewById<TextView>(R.id.txt_ingredients_title)
         val ingredients = view.findViewById<TextView>(R.id.txt_ingredients)
 
+        // Top of the page + "According to the brand"
         viewModel.product.observe(viewLifecycleOwner) { product ->
             if (product == null) return@observe
-
             brand.text = product.brand
             name.text = product.name
             meta.text = listOfNotNull(product.category, product.priceText(), product.ratingText())
                 .joinToString("  ·  ")
-
             showMatch(view, product, viewModel.skinCode)
+        }
 
-            val list = product.ingredientList()
-            ingredientsTitle.text = getString(R.string.product_ingredients, list.size)
-            ingredients.text = list.joinToString("  ·  ")
+        // "SkinCheck recommends" + colored ingredient list
+        viewModel.analysis.observe(viewLifecycleOwner) { analysis ->
+            if (analysis == null) return@observe
+            showVerdict(view, analysis, viewModel.skinCode)
+            ingredientsTitle.text = getString(R.string.product_ingredients, analysis.ingredients.size)
+            ingredients.text = coloredIngredients(analysis)
         }
 
         // ♡ button: save to / remove from My list
@@ -55,7 +65,94 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
         if (viewModel.product.value == null) viewModel.load(productId)
     }
 
-    // Fills the big colored card: green ✓, red ✕ or neutral ?
+    // ---------- SkinCheck recommends ----------
+
+    private fun showVerdict(view: View, analysis: ProductAnalysis, skinCode: String?) {
+        val icon = view.findViewById<TextView>(R.id.txt_verdict_icon)
+        val title = view.findViewById<TextView>(R.id.txt_verdict_title)
+        val counts = view.findViewById<TextView>(R.id.txt_verdict_counts)
+        val container = view.findViewById<LinearLayout>(R.id.list_flagged)
+
+        when (analysis.verdict) {
+            Verdict.RECOMMENDED -> {
+                icon.setText(R.string.match_icon_yes)
+                title.setText(R.string.verdict_recommended)
+            }
+            Verdict.CAREFUL -> {
+                icon.setText(R.string.verdict_icon_careful)
+                title.setText(R.string.verdict_careful)
+            }
+            Verdict.NOT_RECOMMENDED -> {
+                icon.setText(R.string.match_icon_no)
+                title.setText(R.string.verdict_not_recommended)
+            }
+            Verdict.UNKNOWN -> {
+                icon.setText(R.string.match_icon_unknown)
+                title.setText(R.string.verdict_unknown)
+            }
+        }
+        val rating = when (analysis.verdict) {
+            Verdict.RECOMMENDED -> Rating.GOOD
+            Verdict.CAREFUL -> Rating.CAUTION
+            Verdict.NOT_RECOMMENDED -> Rating.AVOID
+            Verdict.UNKNOWN -> Rating.NEUTRAL
+        }
+        icon.backgroundTintList = ColorStateList.valueOf(dotColor(rating))
+        title.setTextColor(textColor(rating) ?: color(R.color.ink))
+
+        val skinName = SkinType.displayName(requireContext(), skinCode)
+            ?: getString(R.string.verdict_no_quiz)
+        counts.text = getString(
+            R.string.verdict_counts, analysis.good, analysis.caution, analysis.avoid, skinName
+        )
+
+        // One row per ingredient group we know something about, worst first
+        container.removeAllViews()
+        for ((info, items) in analysis.groups()) {
+            val row = layoutInflater.inflate(R.layout.item_ingredient, container, false)
+            row.findViewById<View>(R.id.view_dot).backgroundTintList =
+                ColorStateList.valueOf(dotColor(items.first().rating))
+            row.findViewById<TextView>(R.id.txt_ing_name).text = info.name
+            row.findViewById<TextView>(R.id.txt_ing_found).text =
+                getString(R.string.verdict_found, items.joinToString(", ") { it.name })
+            row.findViewById<TextView>(R.id.txt_ing_why).text = info.why
+            container.addView(row)
+        }
+    }
+
+    // All ingredients in one text; the known ones are colored and bold
+    private fun coloredIngredients(analysis: ProductAnalysis): CharSequence = buildSpannedString {
+        analysis.ingredients.forEachIndexed { index, item ->
+            if (index > 0) append("  ·  ")
+            val tint = textColor(item.rating)
+            if (tint == null) {
+                append(item.name)
+            } else {
+                color(tint) { bold { append(item.name) } }
+            }
+        }
+    }
+
+    private fun color(res: Int) = ContextCompat.getColor(requireContext(), res)
+
+    // Color of the dots and the big icon
+    private fun dotColor(rating: Rating) = when (rating) {
+        Rating.GOOD -> color(R.color.rating_green)
+        Rating.CAUTION -> color(R.color.rating_yellow)
+        Rating.AVOID -> color(R.color.rating_red)
+        Rating.NEUTRAL -> color(R.color.ink_soft)
+    }
+
+    // Color for text (darker yellow, so it can be read on white); null = normal text
+    private fun textColor(rating: Rating): Int? = when (rating) {
+        Rating.GOOD -> color(R.color.rating_green)
+        Rating.CAUTION -> color(R.color.rating_yellow_text)
+        Rating.AVOID -> color(R.color.rating_red)
+        Rating.NEUTRAL -> null
+    }
+
+    // ---------- According to the brand ----------
+
     private fun showMatch(view: View, product: Product, skinCode: String?) {
         val card = view.findViewById<MaterialCardView>(R.id.card_match)
         val icon = view.findViewById<TextView>(R.id.txt_match_icon)
@@ -92,10 +189,9 @@ class ProductFragment : Fragment(R.layout.fragment_product) {
     }
 
     private fun paint(card: MaterialCardView, icon: TextView, title: TextView, strong: Int, light: Int) {
-        val context = requireContext()
-        card.setCardBackgroundColor(ContextCompat.getColor(context, light))
-        icon.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, strong))
-        title.setTextColor(ContextCompat.getColor(context, strong))
+        card.setCardBackgroundColor(color(light))
+        icon.backgroundTintList = ColorStateList.valueOf(color(strong))
+        title.setTextColor(color(strong))
     }
 
     // {"dry", "normal"} -> "dry, normal" (in the phone's language)

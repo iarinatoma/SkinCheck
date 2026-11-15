@@ -54,7 +54,6 @@
                 android:layout_marginTop="6dp"
                 android:textColor="@color/ink_soft" />
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_favorite"
                 style="@style/Widget.Material3.Button.OutlinedButton"
@@ -64,12 +63,100 @@
                 android:text="@string/btn_save"
                 app:cornerRadius="24dp" />
 
-            <!-- Big card: does it suit my skin? -->
+            <!-- 1) SkinCheck recommends: our own analysis of the ingredients -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="24dp"
+                app:strokeColor="@color/line">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.08"
+                        android:text="@string/verdict_label"
+                        android:textAllCaps="true"
+                        android:textColor="@color/rose_dark"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/txt_verdict_icon"
+                            android:layout_width="44dp"
+                            android:layout_height="44dp"
+                            android:background="@drawable/bg_avatar"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txt_verdict_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_verdict_counts"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:textColor="@color/ink_soft"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Rows from item_ingredient.xml are added here by the code -->
+                    <LinearLayout
+                        android:id="@+id/list_flagged"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- 2) What the brand says (skin types from the dataset) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.08"
+                android:text="@string/label_brand_says"
+                android:textAllCaps="true"
+                android:textColor="@color/rose_dark"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_match"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
@@ -115,12 +202,12 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Ingredients -->
+            <!-- 3) All ingredients -->
             <com.google.android.material.card.MaterialCardView
                 style="@style/Widget.Material3.CardView.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="24dp"
                 app:strokeColor="@color/line">

@@ -3,7 +3,9 @@ package com.example.skincheck.products
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.skincheck.data.IngredientKnowledge
 import com.example.skincheck.data.Product
+import com.example.skincheck.data.ProductAnalysis
 import com.example.skincheck.data.ProductRepository
 import com.example.skincheck.data.Session
 import com.example.skincheck.data.UserRepository
@@ -13,9 +15,11 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
 
     private val products = ProductRepository(application)
     private val users = UserRepository(application)
+    private val knowledge = IngredientKnowledge.get(application)
     private val userId = Session.userId(application)
 
     val product = MutableLiveData<Product?>()
+    val analysis = MutableLiveData<ProductAnalysis?>()   // SkinCheck recommends
     val isFavorite = MutableLiveData(false)
 
     // The user's skin type, e.g. "normal" (null = quiz not taken)
@@ -26,6 +30,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         skinCode = userId?.let { users.getUser(it)?.skinType }
         val loaded = products.getById(productId)
         product.value = loaded
+        analysis.value = loaded?.let { ProductAnalysis(knowledge.analyze(it, skinCode)) }
 
         if (userId != null && loaded != null) {
             products.markViewed(userId, loaded.id)          // goes to "Recently viewed"
